@@ -110,5 +110,5 @@ Vous pouvez ajouter des tests Postman ou Swagger pour valider votre API
 
 
 
-# Front
-Pour lancer le front lancer `mvn spring-boot:run`
+# Back
+Pour lancer le back lancer `mvn spring-boot:run`
