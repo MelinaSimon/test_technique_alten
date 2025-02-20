@@ -200,17 +200,13 @@ Le front-end permet d'afficher les produits et de gérer l’interaction avec l�
 
 ### Back-end
 
-1. Cloner le projet :
-   ```sh
-   git clone <repository_url>
-   ```
-2. Installer les dépendances :
+1. Installer les dépendances :
    ```sh
    cd back
    mvn clean install
    ```
-3. Configurer la base de données et les variables d’environnement.
-4. Lancer le serveur :
+2. Configurer la base de données et les variables d’environnement.
+3. Lancer le serveur :
    ```sh
    mvn spring-boot:run
    ```
