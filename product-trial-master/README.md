@@ -108,7 +108,124 @@ Le back-end créé doit pouvoir gérer les produits dans une base de données SQ
 
 Vous pouvez ajouter des tests Postman ou Swagger pour valider votre API
 
+# Avancée du projet
+
+## Technologies utilisées
+
+- **Back-end** : Java/SpringBoot
+- **Base de données** : MariaDB
+- **Authentification** : JWT Token
+- **Front-end** : Angular
+
+---
+
+## Back-end
+
+Le back-end permet de gérer les produits, les comptes utilisateurs, l'authentification et la gestion du panier et de la liste d'envie.
+
+### Routes disponibles
+
+#### Produits
+
+| Méthode    | URL                 | Description                     | Authentification                               |
+| ---------- | ------------------- | ------------------------------- | ---------------------------------------------- |
+| **GET**    | `/api/products`     | Récupérer tous les produits     | ❌                                              |
+| **POST**   | `/api/products`     | Créer un produit                | ✅ ([admin@admin.com](mailto\:admin@admin.com)) |
+| **GET**    | `/api/products/:id` | Récupérer un produit spécifique | ❌                                              |
+| **PATCH**  | `/api/products/:id` | Modifier un produit             | ✅ ([admin@admin.com](mailto\:admin@admin.com)) |
+| **DELETE** | `/api/products/:id` | Supprimer un produit            | ✅ ([admin@admin.com](mailto\:admin@admin.com)) |
+
+#### Utilisateurs
+
+| Méthode  | URL            | Description                      |
+| -------- | -------------- | -------------------------------- |
+| **POST** | `/api/account` | Créer un compte utilisateur      |
+| **POST** | `/api/token`   | Générer un token JWT (connexion) |
+
+#### Panier
+
+| Méthode    | URL                                    | Description                          | Authentification |
+| ---------- | -------------------------------------- | ------------------------------------ | ---------------- |
+| **GET**    | `/api/cart/:userid`                    | Récupérer le panier d’un utilisateur | ✅ (Token JWT)    |
+| **POST**   | `/api/cart/:userid?productid&quantity` | Ajouter un produit au panier         | ✅ (Token JWT)    |
+| **DELETE** | `/api/cart/:userid?productid&quantity` | Retirer un produit du panier         | ✅ (Token JWT)    |
+| **PUT**    | `/api/cart/:userid?productid&quantity` | Modifier la quantité d’un produit    | ✅ (Token JWT)    |
+| **DELETE** | `/api/cart/:userid/clear`              | Vider le panier                      | ✅ (Token JWT)    |
+
+#### Liste d’envie
+
+| Méthode    | URL                               | Description                            | Authentification |
+| ---------- | --------------------------------- | -------------------------------------- | ---------------- |
+| **GET**    | `/api/wishlist/:userid`           | Récupérer la liste d’envie             | ✅ (Token JWT)    |
+| **POST**   | `/api/wishlist/:userid?productid` | Ajouter un produit à la liste d’envie  | ✅ (Token JWT)    |
+| **DELETE** | `/api/wishlist/:userid?productid` | Retirer un produit de la liste d’envie | ✅ (Token JWT)    |
+| **DELETE** | `/api/wishlist/:userid/clear`     | Vider la liste d’envie                 | ✅ (Token JWT)    |
+
+### Authentification et sécurité
+
+- JWT est utilisé pour l'authentification.
+- Seul l'utilisateur ayant l'email `admin@admin.com` peut ajouter, modifier ou supprimer des produits.
+- Chaque utilisateur ne peut accéder qu'à ses propres données (panier et liste d’envie).
+
+### Tests
+
+- Postman et/ou Swagger peuvent être utilisés pour tester l’API.
+
+---
+
+## Front-end
+
+Le front-end permet d'afficher les produits et de gérer l’interaction avec l’utilisateur.
+
+### Fonctionnalités implémentées
+
+✅ **Afficher toutes les informations pertinentes d’un produit sur la liste**
+
+### Fonctionnalités en cours
+
+🚧 **Ajouter un produit au panier depuis la liste** (Le token est bien récupéré via un formulaire de connexion, mais l’envoi des requêtes vers le back ne contient ni le token ni l’ID utilisateur)
+
+### Fonctionnalités restantes
+
+- Permettre de supprimer un produit du panier
+- Afficher un badge indiquant la quantité de produits dans le panier
+- Visualiser la liste des produits du panier
+- Créer une page "Contact" avec un formulaire de contact
+- Ajouter un système de pagination et/ou de filtrage sur la liste des produits
+- Permettre d’ajuster la quantité des produits depuis la liste et le panier
+
+---
+
+## Instructions pour lancer le projet
+
+### Back-end
+
+1. Cloner le projet :
+   ```sh
+   git clone <repository_url>
+   ```
+2. Installer les dépendances :
+   ```sh
+   cd back
+   mvn clean install
+   ```
+3. Configurer la base de données et les variables d’environnement.
+4. Lancer le serveur :
+   ```sh
+   mvn spring-boot:run
+   ```
+
+### Front-end
+
+1. Cloner le projet (si ce n'est pas déjà fait).
+2. Installer les dépendances :
+   ```sh
+   cd front
+   npm install
+   ```
+3. Lancer l'application :
+   ```sh
+   ng serve
+   ```
 
 
-# Back
-Pour lancer le back lancer `mvn spring-boot:run`
